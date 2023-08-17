@@ -299,9 +299,10 @@ public class CallrecordingApiController {
 			MediaType.APPLICATION_JSON_VALUE })
 	public void exotelSmsCallBack(@PathVariable String id,
 			@RequestBody String callBackResponse) throws ParseException {
-		logger.info("Method:exotelSmsCallBack smsCampaignSid ::" + id);
+		
 		JSONObject jobj = jsonParsing(callBackResponse);
 		String smsCampaignSid = (String) jobj.get("sid");
+		logger.info("Method:ap exotelSmsCallBack smsCampaignSid ::" + smsCampaignSid);
 		String created_time = (String) jobj.get("created_time");
 		String last_viewed = (String) jobj.get("last_viewed");
 		long total_clicks = (Long) jobj.get("total_clicks");
