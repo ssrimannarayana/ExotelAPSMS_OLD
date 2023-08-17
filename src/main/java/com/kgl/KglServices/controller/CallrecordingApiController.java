@@ -50,7 +50,7 @@ public class CallrecordingApiController {
 	}
 
 	@PostMapping("/ExotelSmsAP")
-	public ResponseEntity<String> ExotelSmsAP() throws Exception {
+	public ResponseEntity<String> ExotelSmsAP() throws JsonMappingException, JsonProcessingException  {
 		String AP_URL = ap_sms_googlesheet_data_restapi;
 		List<CampaignPojo> artist = getCampDataAPAndROAP(AP_URL);
 		int recordsSize = artist.size();

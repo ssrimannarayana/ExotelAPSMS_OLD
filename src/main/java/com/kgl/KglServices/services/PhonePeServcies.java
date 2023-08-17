@@ -69,16 +69,17 @@ public class PhonePeServcies {
 	@Async
 	public CompletableFuture<List<CampaignPojo>> startSmsCampaignList(List<CampaignPojo> campList)
 			throws JsonProcessingException, ParseException, java.text.ParseException {
+		String dateFormat = "HH:mm:ss";
 		for (CampaignPojo campaignPojo : campList) {
 			if(campaignPojo.getMOBILE_NUMBER().length()<10)
 			{
 				logger.info("AP SMS service failed due to wrong phno::"+ campaignPojo.getMOBILE_NUMBER());
 				continue;
 			}
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dateFormat);
 			LocalDateTime now = LocalDateTime.now();
-			Date startTime = new SimpleDateFormat("HH:mm:ss").parse(dtf.format(now));
-			Date endTime = new SimpleDateFormat("HH:mm:ss").parse(end_time);
+			Date startTime = new SimpleDateFormat(dateFormat).parse(dtf.format(now));
+			Date endTime = new SimpleDateFormat(dateFormat).parse(end_time);
 			long campaign = utility.getCampaign(campaignPojo.getDUE_DATE());
 			campaignPojo.setCAMPAIGN(campaign);
 			if (startTime.before(endTime)) {
