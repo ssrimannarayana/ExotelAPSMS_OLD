@@ -241,9 +241,9 @@ public class CallrecordingApiController {
 
 	@RequestMapping(path = "/phpeCallStatusApi/{id}", method = RequestMethod.POST, consumes = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public String phpeCallStatusApi(@PathVariable String id,
+	public ResponseEntity<String> phpeCallStatusApi(@PathVariable String id,
 			@RequestBody String callBackResponse) throws JsonMappingException, JsonProcessingException, ParseException {
-		String respStatus = null;
+		ResponseEntity<String> respStatus = null;
 		logger.info("Method:phpeCallStatusApi ID ::" + id);
 		try {
 			JSONObject jobj = jsonParsing(callBackResponse);

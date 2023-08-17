@@ -246,7 +246,7 @@ public class PhonePeServcies {
 		return random_int;
 	}
 
-	public void updateSmsApiIntoAppSheet(String id, String smsSid, String smsStatus, String detailedStatusCode,
+	public ResponseEntity<String> updateSmsApiIntoAppSheet(String id, String smsSid, String smsStatus, String detailedStatusCode,
 			String phpeLink, String method, String campaignSheet) {
 		String url = AP_SMS_UPDATE_GOOGLESHEET_URL;
 		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
@@ -259,10 +259,11 @@ public class PhonePeServcies {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-		ResponseEntity<String> restTemplate = new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
+		//ResponseEntity<String> restTemplate = new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
+		return  new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
 	}
 
-	public void updateSmsCallBackApiIntoAppSheet(String id, String smsCampaignSid, String created_time,
+	public ResponseEntity<String> updateSmsCallBackApiIntoAppSheet(String id, String smsCampaignSid, String created_time,
 			String last_viewed, String total_clicks, String device, String region, String city, String accuracy_radius,
 			String method) {
 		String url = AP_SMS_UPDATE_GOOGLESHEET_URL;
@@ -281,10 +282,11 @@ public class PhonePeServcies {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-		ResponseEntity<String> restTemplate = new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
+		//ResponseEntity<String> restTemplate = new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
+		return new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
 	}
 
-	public String updatePhpeCallbackResponseIntoGoogleSheet(PhonepeResponseObj phpeResobj) {
+	public ResponseEntity<String> updatePhpeCallbackResponseIntoGoogleSheet(PhonepeResponseObj phpeResobj) {
 		// TODO Auto-generated method stub
 		String url = AP_PHPE_CALLBACK_UPDATE_GOOGLESHEET_URL;
 		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
@@ -305,11 +307,13 @@ public class PhonePeServcies {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-		ResponseEntity<String> restTemplate = new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
-		return "success";
+		//ResponseEntity<String> restTemplate = new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
+		//return "success";
+		
+		return new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
 	}
 
-	public String updateCahsFreeSmsCallBackApiIntoAppSheet(String event_type, String cf_subReferenceId,
+	public ResponseEntity<String> updateCahsFreeSmsCallBackApiIntoAppSheet(String event_type, String cf_subReferenceId,
 			String cf_status, String cf_lastStatus, String cf_eventTime, String cf_subscriptionId, String signature) {
 		String url = CASHFREE_CALLBACK_UPDATE_GOOGLESHEET_URL;
 		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
@@ -323,8 +327,10 @@ public class PhonePeServcies {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-		ResponseEntity<String> restTemplate = new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
-		return "success";
+		//ResponseEntity<String> restTemplate = new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
+		//return "success";
+		
+		return new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
 
 	}
 }
