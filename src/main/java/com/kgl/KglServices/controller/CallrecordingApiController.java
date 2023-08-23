@@ -11,6 +11,7 @@ import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -332,7 +333,7 @@ public class CallrecordingApiController {
 			MediaType.APPLICATION_FORM_URLENCODED_VALUE })
 	public void sendSMS(@RequestParam String cf_event, 
 			@RequestParam String cf_subReferenceId,
-			@RequestParam String cf_status,
+			@RequestParam(required = false) String cf_status,
 			@RequestParam String cf_lastStatus,
 			@RequestParam String cf_eventTime,
 			@RequestParam String signature) {
