@@ -317,9 +317,9 @@ public class PhonePeServcies {
 			String cf_status, String cf_lastStatus, String cf_eventTime, String cf_subscriptionId, String signature) {
 		String url = CASHFREE_CALLBACK_UPDATE_GOOGLESHEET_URL;
 		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-		map.add("cf_subscriptionId", cf_subscriptionId);
+		map.add("cf_subscriptionId", cf_subReferenceId);
 		map.add("event_type", event_type);
-		map.add("cf_subReferenceId", cf_subReferenceId);
+		map.add("cf_subReferenceId", cf_subscriptionId);
 		map.add("cf_status", cf_status);
 		map.add("cf_lastStatus", cf_lastStatus);
 		map.add("cf_eventTime", cf_eventTime);

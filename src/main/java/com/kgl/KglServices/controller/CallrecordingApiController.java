@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -328,21 +329,20 @@ public class CallrecordingApiController {
 	}
 
 	@RequestMapping(path = "/cashFree", method = RequestMethod.POST, consumes = {
-			MediaType.MULTIPART_FORM_DATA_VALUE })
-	public void sendSMS(@RequestPart String cf_event, 
-			@RequestPart String cf_subReferenceId,
-			@RequestPart String cf_status,
-			@RequestPart String cf_lastStatus,
-			@RequestPart String cf_eventTime,
-			@RequestPart String cf_subscriptionId,
-			@RequestPart String signature) {
-		logger.info("cashFree Call back URL started....rowid:: " + cf_subscriptionId);
+			MediaType.APPLICATION_FORM_URLENCODED_VALUE })
+	public void sendSMS(@RequestParam String cf_event, 
+			@RequestParam String cf_subReferenceId,
+			@RequestParam String cf_status,
+			@RequestParam String cf_lastStatus,
+			@RequestParam String cf_eventTime,
+			@RequestParam String signature) {
+		logger.info("cashFree Call back URL started....rowid:: " + cf_subReferenceId);
 		try {
 			phpeServices.updateCahsFreeSmsCallBackApiIntoAppSheet(cf_event,cf_subReferenceId,
-					cf_status,cf_lastStatus,cf_eventTime,cf_subscriptionId,signature);
+					cf_status,cf_lastStatus,cf_eventTime,"0",signature);
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 		}
-		logger.info("cashFree Call back URL ended....rowid:: " + cf_subscriptionId);
+		logger.info("cashFree Call back URL ended....rowid:: " + cf_subReferenceId);
 	}
 }
