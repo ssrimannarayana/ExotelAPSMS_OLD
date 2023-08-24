@@ -11,7 +11,6 @@ import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -334,13 +332,13 @@ public class CallrecordingApiController {
 	public void sendSMS(@RequestParam String cf_event, 
 			@RequestParam String cf_subReferenceId,
 			@RequestParam(required = false) String cf_status,
-			@RequestParam String cf_lastStatus,
-			@RequestParam String cf_eventTime,
-			@RequestParam String signature) {
+			@RequestParam(required = false) String cf_lastStatus,
+			@RequestParam(required = false) String cf_eventTime,
+			@RequestParam(required = false) String signature) {
 		logger.info("cashFree Call back URL started....rowid:: " + cf_subReferenceId);
 		try {
 			phpeServices.updateCahsFreeSmsCallBackApiIntoAppSheet(cf_event,cf_subReferenceId,
-					cf_status,cf_lastStatus,cf_eventTime,"0",signature);
+					cf_status,cf_lastStatus,cf_eventTime,signature);
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 		}

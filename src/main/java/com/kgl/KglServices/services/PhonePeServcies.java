@@ -314,12 +314,11 @@ public class PhonePeServcies {
 	}
 
 	public ResponseEntity<String> updateCahsFreeSmsCallBackApiIntoAppSheet(String event_type, String cf_subReferenceId,
-			String cf_status, String cf_lastStatus, String cf_eventTime, String cf_subscriptionId, String signature) {
+			String cf_status, String cf_lastStatus, String cf_eventTime, String signature) {
 		String url = CASHFREE_CALLBACK_UPDATE_GOOGLESHEET_URL;
 		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-		map.add("cf_subscriptionId", cf_subReferenceId);
+		map.add("cf_subReferenceId", cf_subReferenceId);
 		map.add("event_type", event_type);
-		map.add("cf_subReferenceId", cf_subscriptionId);
 		map.add("cf_status", cf_status);
 		map.add("cf_lastStatus", cf_lastStatus);
 		map.add("cf_eventTime", cf_eventTime);
@@ -327,9 +326,6 @@ public class PhonePeServcies {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<MultiValueMap<String, String>>(map, headers);
-		//ResponseEntity<String> restTemplate = new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
-		//return "success";
-		
 		return new RestTemplate().exchange(url, HttpMethod.POST, entity, String.class);
 
 	}
